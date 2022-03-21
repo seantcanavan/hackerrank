@@ -3,10 +3,6 @@ root = {}
 
 def no_prefix(words):
     for word in words:
-        if word == "g":
-            x = 4
-        if word == "idieadebjbdiadbeccbdjhjbijfgejeefabbfjf":
-            x = 5
         found = test_prefixes(root, word)
         if found:
             print("BAD SET")
@@ -17,24 +13,21 @@ def no_prefix(words):
     print("GOOD SET")
 
 
-def test_prefixes(current_root, val):
-    # while len(val) > 0:
+def test_prefixes(current_root, word):
     pos = current_root
-    for i in range(len(val)):
-        char = val[i]
+    for i in range(len(word)):
+        char = word[i]
         try:
             pos = pos[char]
             # check if we've saved another string that is a substring of THIS string
             if '.' in pos:
                 return True
             # check if we've saved another string that THIS is a substring of
-            if i == len(val) - 1:
+            if i == len(word) - 1:
                 return True
         except KeyError:
+            # if we get a KeyError, that means we're in uncharted territory, and we can save safely
             break
-
-        # # shrink val by one to check each subsequent substring of val
-        # val = val[1:]
 
     return False
 
